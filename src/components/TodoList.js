@@ -11,7 +11,7 @@ const TodoListBlock = styled.div`
 
 const TodoList = ({ TodoItemArray }) => {
     const TodoItemArrayList = TodoItemArray.map(todoItemAttr => {
-        return <TodoItem text={todoItemAttr.text} done={todoItemAttr.done}></TodoItem>
+        return <TodoItem text={todoItemAttr.text} done={todoItemAttr.done} key={todoItemAttr.id}></TodoItem>
     });
     return (
         <TodoListBlock>

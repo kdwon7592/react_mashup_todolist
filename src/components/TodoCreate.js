@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import { MdAdd, MdCancel, MdRemove } from "react-icons/md";
+import { MdAdd } from "react-icons/md";
 
 const CircleButton = styled.button`
     background: #38d9a9;
