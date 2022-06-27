@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { MdDone, MdDelete } from "react-icons/md";
 import { css } from "styled-components";
 import styled from "styled-components";
