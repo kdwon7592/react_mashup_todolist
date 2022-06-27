@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import { MdAdd, MdCancel, MdRemove } from "react-icons/md";
+import { MdAdd } from "react-icons/md";
 
 const CircleButton = styled.button`
     background: #38d9a9;
@@ -76,17 +76,29 @@ const Input = styled.input`
     box-sizing: border-box;
 `;
 
-const TodoCreate = () => {
+const TodoCreate = ({ onGetResult }) => {
     const [open, setOpen] = useState(false);
-
     const onToggle = () => setOpen(!open);
+    let [inputValue, setInputValue] = useState("")
+
+
+    const handleForSubmit = (e) => {
+        e.preventDefault();
+        onGetResult(inputValue);
+        setInputValue("");
+    }
 
     return (
         <>
             {open && (
                 <InsertFormPositioner>
-                    <InsertForm>
-                        <Input autoFocus placeholder="할 일을 입력 후, Enter를 누르세요"></Input>
+                    <InsertForm onSubmit={handleForSubmit}>
+                        <Input
+                            value={inputValue}
+                            autoFocus
+                            placeholder="할 일을 입력 후, Enter를 누르세요"
+                            onChange={(event) => setInputValue(event.target.value)}>
+                        </Input>
                     </InsertForm>
                 </InsertFormPositioner>
             )}

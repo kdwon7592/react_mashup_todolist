@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MdDone, MdDelete } from "react-icons/md";
 import { css } from "styled-components";
 import styled from "styled-components";
@@ -58,13 +58,21 @@ const Text = styled.div`
     }
 `
 
-const TodoItem = ({ id, done, text }) => {
+const TodoItem = ({ id, done, text, removeTodoItem, checkDoneItem }) => {
+    const handleCheckDone = () => {
+        checkDoneItem(id);
+    };
+
+    const handleClickRemove = () => {
+        removeTodoItem(id);
+    };
+
     return (
         <TodoItemBlock>
-            <CheckCircle done={done}>{done && <MdDone />}</CheckCircle>
+            <CheckCircle done={done} onClick={handleCheckDone}>{done && <MdDone />}</CheckCircle>
             <Text done={done}>{text}</Text>
             <Remove>
-                <MdDelete />
+                <MdDelete onClick={handleClickRemove} />
             </Remove>
         </TodoItemBlock>
     )

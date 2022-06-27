@@ -9,15 +9,25 @@ const TodoListBlock = styled.div`
     overflow-y: auto;
 `
 
-const TodoList = ({ TodoItemArray }) => {
-    const TodoItemArrayList = TodoItemArray.map(todoItemAttr => {
-        return <TodoItem text={todoItemAttr.text} done={todoItemAttr.done}></TodoItem>
+const TodoList = ({ todoItemArray, removeTodoItem, checkDoneItem }) => {
+    const TodoItemArrayList = todoItemArray.map(todoItemAttr => {
+        return (
+            <TodoItem
+                text={todoItemAttr.text}
+                done={todoItemAttr.done}
+                key={todoItemAttr.id}
+                id={todoItemAttr.id}
+                removeTodoItem={removeTodoItem}
+                checkDoneItem={checkDoneItem}
+            >
+            </TodoItem>
+        )
     });
     return (
         <TodoListBlock>
             {TodoItemArrayList}
         </TodoListBlock>
-    )
+    );
 }
 
 export default TodoList;

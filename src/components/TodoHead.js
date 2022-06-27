@@ -35,7 +35,7 @@ const TodoHeadBlock = styled.div`
     }
 `;
 
-const TodoHead = () => {
+const TodoHead = ({ undoneCount }) => {
 
     const today = new Date();
 
@@ -43,7 +43,7 @@ const TodoHead = () => {
         <TodoHeadBlock>
             <h1>{`${today.getFullYear()}년 ${today.getMonth()}월 ${today.getDate()}일`}</h1>
             <div className="day">{`${days[today.getDay()]}`}</div>
-            <div className="tasks-left">할 일 2개 남음</div>
+            <div className="tasks-left">{`할 일 ${undoneCount}개 남음`}</div>
         </TodoHeadBlock>
     );
 }
