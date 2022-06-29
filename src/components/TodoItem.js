@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { MdDone, MdDelete } from "react-icons/md";
 import { css } from "styled-components";
 import styled from "styled-components";
-import { TodoDispatchContext, TodoStateContext } from "../contexts/TodoContext";
+import { TodoDispatchContext } from "../contexts/TodoContext";
 
 const Remove = styled.div`
     display: flex;
