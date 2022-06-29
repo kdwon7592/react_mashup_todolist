@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { createGlobalStyle } from "styled-components";
 import TodoCreate from "./components/TodoCreate";
 import TodoHead from "./components/TodoHead";
 import TodoList from "./components/TodoList";
 import TodoTemplate from "./components/TodoTemplate";
+import { TodoProvider } from "./contexts/TodoContext";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -11,36 +12,17 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-function App() {
-  console.log('test');
-  const [undoneCount, setUndoneCount] = useState(0);
-  const [todoItemArray, setTodoItemArray] = useState([
-    {
-      text: '프로젝트 생성하기', // 할 일
-      done: false, // 완료 여부
-      id: 0,
-    },
-  ]);
-
-  // useEffect(() => {
-  // const tempArray = (...todoItemArray);
-  // TodoItemArray.forEach(itemAttr => {
-  //   let count = undoneCount;
-  //   if (!itemAttr.done) {
-  //     count = count + 1;
-  //     setUndoneCount(count);
-  //   }
-  // })
-  // }, [])
-
+const App = () => {
   return (
     <>
-      <GlobalStyle />
-      <TodoTemplate>
-        <TodoHead undoneCount={undoneCount} />
-        <TodoList />
-        <TodoCreate />
-      </TodoTemplate>
+      <TodoProvider>
+        <GlobalStyle />
+        <TodoTemplate>
+          <TodoHead />
+          <TodoList />
+          <TodoCreate />
+        </TodoTemplate>
+      </TodoProvider>
     </>
   );
 }

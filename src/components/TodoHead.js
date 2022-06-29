@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { TodoStateContext } from "../contexts/TodoContext";
 
 const days = {
     0: '일요일',
@@ -35,15 +36,16 @@ const TodoHeadBlock = styled.div`
     }
 `;
 
-const TodoHead = ({ undoneCount }) => {
-
+const TodoHead = () => {
+    const todos = useContext(TodoStateContext);
+    const undoneTasks = todos.filter(todo => !todo.done);
     const today = new Date();
 
     return (
         <TodoHeadBlock>
             <h1>{`${today.getFullYear()}년 ${today.getMonth()}월 ${today.getDate()}일`}</h1>
             <div className="day">{`${days[today.getDay()]}`}</div>
-            <div className="tasks-left">{`할 일 ${undoneCount}개 남음`}</div>
+            <div className="tasks-left">{`할 일 ${undoneTasks.length}개 남음`}</div>
         </TodoHeadBlock>
     );
 }
