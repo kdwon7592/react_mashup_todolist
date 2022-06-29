@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { TodoStateContext } from "../contexts/TodoContext";
 import TodoItem from "./TodoItem";
+
 
 const TodoListBlock = styled.div`
     flex: 1;
@@ -9,16 +11,16 @@ const TodoListBlock = styled.div`
     overflow-y: auto;
 `
 
-const TodoList = ({ todoItemArray, removeTodoItem, checkDoneItem }) => {
-    const TodoItemArrayList = todoItemArray.map(todoItemAttr => {
+const TodoList = () => {
+    const todos = useContext(TodoStateContext);
+
+    const TodoItemArrayList = todos.map(todoItemAttr => {
         return (
             <TodoItem
                 text={todoItemAttr.text}
                 done={todoItemAttr.done}
                 key={todoItemAttr.id}
                 id={todoItemAttr.id}
-                removeTodoItem={removeTodoItem}
-                checkDoneItem={checkDoneItem}
             >
             </TodoItem>
         )

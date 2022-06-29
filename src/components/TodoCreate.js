@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled, { css } from "styled-components";
 import { MdAdd } from "react-icons/md";
+import { TodoDispatchContext, TodoNextIdContext } from "../contexts/TodoContext";
 
 const CircleButton = styled.button`
     background: #38d9a9;
@@ -76,23 +77,34 @@ const Input = styled.input`
     box-sizing: border-box;
 `;
 
-const TodoCreate = ({ onGetResult }) => {
+const TodoCreate = () => {
+    console.log("create rendering!!");
     const [open, setOpen] = useState(false);
     const onToggle = () => setOpen(!open);
     let [inputValue, setInputValue] = useState("")
 
+    const dispatch = useContext(TodoDispatchContext);
+    const nextId = useContext(TodoNextIdContext);
 
-    const handleForSubmit = (e) => {
+    const onCreate = (e) => {
         e.preventDefault();
-        onGetResult(inputValue);
+        dispatch({
+            type: 'CREATE',
+            todo: {
+                id: nextId.current++,
+                text: inputValue,
+                done: false,
+            }
+        })
         setInputValue("");
-    }
+        setOpen(false);
+    };
 
     return (
         <>
             {open && (
                 <InsertFormPositioner>
-                    <InsertForm onSubmit={handleForSubmit}>
+                    <InsertForm onSubmit={onCreate}>
                         <Input
                             value={inputValue}
                             autoFocus
@@ -109,4 +121,4 @@ const TodoCreate = ({ onGetResult }) => {
     );
 }
 
-export default TodoCreate;
+export default React.memo(TodoCreate);
